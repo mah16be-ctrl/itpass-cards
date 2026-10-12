@@ -1,0 +1,64 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ITパスポート 単語カード 第4章</title>
+<style>
+:root{--bg:#f6f8f3;--card:#fff;--tx:#1f2a1f;--sub:#5d6b5d;--g:#2e7d32;--gl:#e4f1d8;--bd:#d5dccf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a14;--card:#1f281f;--tx:#e8efe5;--sub:#a3b1a0;--g:#7bc67e;--gl:#2a3d2a;--bd:#344034}}
+:root[data-theme="dark"]{--bg:#141a14;--card:#1f281f;--tx:#e8efe5;--sub:#a3b1a0;--g:#7bc67e;--gl:#2a3d2a;--bd:#344034}
+html,body{height:100%;margin:0}html{height:100dvh}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;display:flex;flex-direction:column;max-width:560px;margin:0 auto;padding:12px 16px;box-sizing:border-box}
+h1{font-size:15px;margin:0 0 8px;color:var(--sub);font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+button{touch-action:manipulation;font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:8px 14px;min-height:40px}
+button.on{background:var(--g);color:#fff;border-color:var(--g)}
+.info{font-size:14px;color:var(--sub);margin:2px 0 6px}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin-bottom:10px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--g);transition:width .3s}
+#card{touch-action:manipulation;flex:1;background:var(--card);border:1px solid var(--bd);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;cursor:pointer;user-select:none;min-height:0}
+#card.vip{background:var(--gl);border-color:var(--g)}
+.badge{font-size:12px;background:var(--g);color:#fff;border-radius:999px;padding:2px 10px;margin-bottom:14px}
+#t{font-size:clamp(24px,7vw,40px);font-weight:700;line-height:1.4;word-break:break-word}
+#d{font-size:clamp(17px,4.6vw,26px);line-height:1.7}
+.hint{font-size:12px;color:var(--sub);margin-top:16px}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ctl button{border-radius:14px;min-height:52px;font-size:16px}
+#ok{grid-column:1/-1;border:2px solid var(--g);color:var(--g);font-weight:700}
+#ok.on{background:var(--g);color:#fff}
+#ok:disabled{opacity:.4}
+@media(min-width:700px){body{max-width:760px;padding:24px}h1{font-size:18px}.ctl{grid-template-columns:repeat(3,1fr)}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:60px;font-size:18px}#card{padding:40px}}
+@media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
+</style></head><body>
+<h1>ITパスポート 第4章 ネットワーク</h1>
+<div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
+<div class="info" id="info"></div>
+<div class="bar"><i id="bi"></i></div>
+<div id="card"></div>
+<div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
+<script>
+const D=[["VLAN", "ヴァーチャルLAN。同じスイッチの中で、ネットワークを分割できる技術（例：人事部と経理部を分ける）", 0], ["MACアドレス", "ネットワーク機器すべてに出荷時から書き込まれた、48ビット(48桁)の一意の番号、16進数で表示", 1], ["無線LANの暗号化の強度", "WEP→WPA→WPA2→WPA3の順に強くなる（WEPが最も弱い）", 1], ["SMTP", "メールを送信したり、メールサーバー間で転送したりするプロトコル", 1], ["POP（POP3）", "メールサーバーにある新着メールを、一括して受信するプロトコル", 1], ["IMAP（IMAP4）", "メールをサーバー上で保管し、未読・既読もサーバー上で管理できる受信プロトコル", 1], ["DNSサーバー", "URLやドメイン名を、IPアドレスに変換して教えてくれるサーバー", 1], ["IPv6", "IPアドレスの枯渇対策。128ビットで、16ビットごとにコロン（:）で区切り、16進数で表記する", 1], ["ポート番号", "アプリケーションごとの窓口。ポートは「港」の意味で、OSが番号を見て、待っているアプリに案内する", 0], ["キャリアアグリゲーション", "複数の異なる周波数帯の電波を束ねて、無線通信を高速化する技術", 0], ["To（宛先）", "メールを送る本来の相手。複数送れば全員のアドレスが見える", 0], ["Cc（カーボンコピー）", "「参考までに」見てほしい相手。宛先と同じく、全員のアドレスが見える", 1], ["Bcc（ブラインドカーボンコピー）", "Bccに入れたアドレスは他の受信者には見えない。受信者の個人情報保護に使われる", 1], ["HTMLメール", "画像や装飾を使い、Webサイトのような見た目にできるメール。企業ではセキュリティの脆弱性が問題", 0], ["テキストメール", "文字だけのメール。HTMLを表示できない端末では、こちらが表示される。企業で採用される形式", 0]];
+let M={};try{M=JSON.parse(localStorage.getItem("itp4")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("itp4",JSON.stringify(M))}catch(e){}};
+let f="all",sh=false,sv=false,L=[],i=0,back=false;
+const $=s=>document.querySelector(s);
+const vis=k=>sv||!M[D[k][0]];
+function nxt(s){for(let n=1;n<=L.length;n++){const j=((i+s*n)%L.length+L.length)%L.length;if(vis(L[j]))return j}return -1}
+function build(){L=D.map((_,k)=>k).filter(k=>f=="all"||D[k][2]);
+if(sh)for(let k=L.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[L[k],L[j]]=[L[j],L[k]]}
+i=0;if(L.length&&!vis(L[0]))i=nxt(1);back=false;render()}
+function render(){const c=$("#card"),T=L.length,N=L.filter(k=>!M[D[k][0]]).length,ok=$("#ok");
+$("#info").textContent="残り "+N+" 枚 / 全 "+T+" 枚";$("#bi").style.width=(T?(T-N)/T*100:0)+"%";
+if(i<0||!T){c.className="";ok.disabled=true;ok.className="";ok.textContent="○ 覚えた";
+c.innerHTML="<div id='d'>全部覚えました 🎉</div><div class='hint'>上の［「覚えた」を見る］で復習できます</div>";return}
+ok.disabled=false;const d=D[L[i]],on=!!M[d[0]];c.className=d[2]?"vip":"";
+ok.className=on?"on":"";ok.textContent=on?"✓ 覚えた（タップで取り消し）":"○ 覚えた";
+c.innerHTML=(d[2]?"<span class='badge'>超重要</span>":"")+(back?"<div class='hint' style='margin:0 0 12px'>"+d[0]+"</div><div id='d'>"+d[1]+"</div>":"<div id='t'>"+d[0]+"</div><div class='hint'>タップで解説</div>")}
+const go=s=>{if(!L.length)return;i=nxt(s);back=false;render()};
+$("#card").onclick=()=>{if(i>=0){back=!back;render()}};
+$("#nx").onclick=()=>go(1);$("#pv").onclick=()=>go(-1);
+$("#ok").onclick=()=>{if(i<0)return;const t=D[L[i]][0];if(M[t])delete M[t];else M[t]=1;save();render()};
+$("#fs").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+if(b.id=="sh"){sh=!sh;b.classList.toggle("on",sh)}else if(b.id=="sv"){sv=!sv;b.classList.toggle("on",sv)}else{f=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x==b))}build()};
+let x0=0;$("#card").ontouchstart=e=>{x0=e.touches[0].clientX};
+$("#card").ontouchend=e=>{const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>60){e.preventDefault();go(dx<0?1:-1)}};
+build();
+</script></body></html>
