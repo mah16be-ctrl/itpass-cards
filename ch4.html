@@ -27,6 +27,7 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 #ok:disabled{opacity:.4}
 @media(min-width:700px){body{max-width:760px;padding:24px}h1{font-size:18px}.ctl{grid-template-columns:repeat(3,1fr)}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:60px;font-size:18px}#card{padding:40px}}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
+.rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 </style></head><body>
 <h1>ITパスポート 第4章 ネットワーク</h1>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
@@ -34,6 +35,7 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
+<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["VLAN", "ヴァーチャルLAN。同じLANの中で、ネットワークを分割できる技術（例：人事部と経理部を分ける）", 0], ["MACアドレス", "ネットワーク機器すべてに出荷時から書き込まれた、48ビット(48桁)の一意の番号、16進数で表示", 1], ["無線LANの暗号化の強度", "WEP→WPA→WPA2→WPA3の順に強くなる（WEPが最も弱い）", 1], ["SMTP（シンプル メール トランスファー プロトコル）", "メールを送信するプロトコル", 1], ["POP（ポスト オフィス プロトコル）", "メールをPCにダウンロードして受信するプロトコル", 1], ["IMAP（インターネット メッセージ アクセス プロトコル）", "メールをサーバー上で管理して受信するプロトコル", 1], ["DNSサーバー（ドメイン ネーム システム）", "URLやドメイン名を、IPアドレスに変換して教えてくれるサーバー", 1], ["IPv6", "IPアドレスの枯渇対策。コロン（:）で区切り、16進数で表記する", 1], ["ポート番号", "アプリケーションごとの窓口。ポートは「港」の意味で、OSが番号を見て、待っているアプリに案内する", 0], ["キャリアアグリゲーション", "複数の異なる周波数帯の電波を束ねて、無線通信を高速化する技術", 0], ["To（宛先）", "メールを送る本来の相手。複数送れば全員のアドレスが見える", 0], ["Cc（カーボンコピー）", "「参考までに」見てほしい相手。宛先と同じく、全員のアドレスが見える", 1], ["Bcc（ブラインドカーボンコピー）", "Bccに入れたアドレスは他の受信者には見えない。受信者の個人情報保護に使われる", 1], ["HTMLメール", "画像や装飾を使い、Webサイトのような見た目にできるメール。セキュリティの脆弱性が問題になることがある", 0], ["テキストメール", "文字だけのメール。HTMLを表示できない端末では、こちらが表示される。企業で採用されることが多い", 0], ["FTP(ファイル トランスファー プロトコル)", "ファイルをアップロード・ダウンロード（転送）するためのプロトコル", 0], ["NTP（ネットワーク タイム プロトコル）", "ネットワークを通じて、コンピュータの時刻を正確に合わせるプロトコル", 0], ["TCP/IP", "インターネット通信の基本となる、データの送受信を支えるプロトコル", 0]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp4")||"{}")}catch(e){}
@@ -60,5 +62,9 @@ $("#fs").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 if(b.id=="sh"){sh=!sh;b.classList.toggle("on",sh)}else if(b.id=="sv"){sv=!sv;b.classList.toggle("on",sv)}else{f=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x==b))}build()};
 let x0=0;$("#card").ontouchstart=e=>{x0=e.touches[0].clientX};
 $("#card").ontouchend=e=>{const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>60){e.preventDefault();go(dx<0?1:-1)}};
+$("#rs").onclick=()=>{let ok=false;try{ok=confirm("「覚えた」の記録をすべて消して、最初の順番に戻します。よろしいですか？")}catch(e){}
+if(!ok)return;M={};save();f="all";sh=false;sv=false;
+document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x.dataset.f=="all"));
+$("#sh").classList.remove("on");$("#sv").classList.remove("on");build()};
 build();
 </script></body></html>

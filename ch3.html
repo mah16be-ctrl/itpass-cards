@@ -27,6 +27,7 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 #ok:disabled{opacity:.4}
 @media(min-width:700px){body{max-width:760px;padding:24px}h1{font-size:18px}.ctl{grid-template-columns:repeat(3,1fr)}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:60px;font-size:18px}#card{padding:40px}}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
+.rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 </style></head><body>
 <h1>ITパスポート 第3章 システム構成</h1>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
@@ -34,6 +35,7 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
+<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["シンクライアント", "サーバーがアプリを実行しデータも保存し、端末にはデータを残さない方式", 1], ["NAS", "ルーターに直接つなぐ、LAN上のファイルサーバー", 1], ["サーバーの仮想化", "1台のサーバーを、見かけ上は複数台に分けて使う", 1], ["スケールアップ", "CPUや主記憶などを増やして、1台の性能を上げる", 0], ["スケールアウト", "台数を増やして、処理を分散する", 0], ["クラスタリング", "複数のコンピュータを連結し、1台の仮想マシンのように低コストで使う", 1], ["BCP", "事業継続計画。災害などが起きても事業を続けるための計画", 1], ["直列システムの稼働率", "1つでも故障すると全体が停止する。稼働率は低くなる", 1], ["並列システムの稼働率", "1つでも動けば停止しない。稼働率は高くなる", 1], ["TCO", "導入から運用までにかかる総費用（初期費用＋運用費用）", 1], ["IoT", "あらゆるモノにセンサをつけ、インターネットにつなぐ仕組み。センサ、アクチュエータ", 1], ["エッジコンピューティング", "クラウドではなく利用者の近く（エッジ）で処理し、通信量と遅延を減らす", 1], ["テレマティクス", "遠距離通信＋情報科学。位置情報でリアルタイムに情報をやりとりする（カーナビなど）", 1], ["自動運転レベル3", "限定地域内で、何かの時のために人間がいる", 1], ["自動運転レベル4", "限定地域内で、人間はいなくてもよい", 1], ["PoC（概念実証）", "そもそも実現できるかを、技術やアイデアの面から検証する", 1], ["PoV（価値実証）", "使う価値や効果（投資対効果）があるかを検証する", 0], ["LPWA", "Low Power Wide Area。省電力で、広いエリアで通信できる", 1], ["プラチナバンド", "700〜900MHz帯の電波。建物を回り込んだり通り抜けたりしやすく、つながりやすい", 0], ["ASP", "ネット経由でシステムを提供する、事業者に注目した言葉", 0], ["SaaS", "ネット経由で使えるサービス（ソフトウェア）に注目した言葉", 1], ["情報リテラシー", "情報を正しく理解し、適切に扱い活用する力", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp3")||"{}")}catch(e){}
@@ -60,5 +62,9 @@ $("#fs").onclick=e=>{const b=e.target.closest("button");if(!b)return;
 if(b.id=="sh"){sh=!sh;b.classList.toggle("on",sh)}else if(b.id=="sv"){sv=!sv;b.classList.toggle("on",sv)}else{f=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x==b))}build()};
 let x0=0;$("#card").ontouchstart=e=>{x0=e.touches[0].clientX};
 $("#card").ontouchend=e=>{const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>60){e.preventDefault();go(dx<0?1:-1)}};
+$("#rs").onclick=()=>{let ok=false;try{ok=confirm("「覚えた」の記録をすべて消して、最初の順番に戻します。よろしいですか？")}catch(e){}
+if(!ok)return;M={};save();f="all";sh=false;sv=false;
+document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x.dataset.f=="all"));
+$("#sh").classList.remove("on");$("#sv").classList.remove("on");build()};
 build();
 </script></body></html>
