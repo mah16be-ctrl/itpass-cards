@@ -1,0 +1,71 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ITパスポート 単語カード 第8章（後半）</title>
+<style>
+:root{--bg:#f6f8f3;--card:#fff;--tx:#1f2a1f;--sub:#5d6b5d;--g:#2e7d32;--gl:#e4f1d8;--bd:#d5dccf;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141a14;--card:#1f281f;--tx:#e8efe5;--sub:#a3b1a0;--g:#7bc67e;--gl:#2a3d2a;--bd:#344034}}
+:root[data-theme="dark"]{--bg:#141a14;--card:#1f281f;--tx:#e8efe5;--sub:#a3b1a0;--g:#7bc67e;--gl:#2a3d2a;--bd:#344034}
+html,body{height:100%;margin:0}html{height:100dvh}
+body{background:var(--bg);color:var(--tx);font-family:-apple-system,"Hiragino Sans","Noto Sans JP",sans-serif;display:flex;flex-direction:column;max-width:560px;margin:0 auto;padding:12px 16px;box-sizing:border-box}
+h1{font-size:15px;margin:0 0 8px;color:var(--sub);font-weight:600}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+button{touch-action:manipulation;font:inherit;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:999px;padding:8px 14px;min-height:40px}
+button.on{background:var(--g);color:#fff;border-color:var(--g)}
+.info{font-size:14px;color:var(--sub);margin:2px 0 6px}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin-bottom:10px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--g);transition:width .3s}
+#card{touch-action:manipulation;flex:1;background:var(--card);border:1px solid var(--bd);border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;cursor:pointer;user-select:none;min-height:0}
+#card.vip{background:var(--gl);border-color:var(--g)}
+.badge{font-size:12px;background:var(--g);color:#fff;border-radius:999px;padding:2px 10px;margin-bottom:14px}
+#t{font-size:clamp(24px,7vw,40px);font-weight:700;line-height:1.4;word-break:break-word}
+#d{font-size:clamp(17px,4.6vw,26px);line-height:1.7}
+.hint{font-size:12px;color:var(--sub);margin-top:16px}
+.ctl{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.ctl button{border-radius:14px;min-height:52px;font-size:16px}
+#ok{grid-column:1/-1;border:2px solid var(--g);color:var(--g);font-weight:700}
+#ok.on{background:var(--g);color:#fff}
+#ok:disabled{opacity:.4}
+@media(min-width:700px){body{max-width:760px;padding:24px}h1{font-size:18px}.ctl{grid-template-columns:repeat(3,1fr)}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:60px;font-size:18px}#card{padding:40px}}
+@media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
+.rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
+#t,#d,.hint{white-space:pre-line}
+</style></head><body>
+<h1>ITパスポート 第8章 マネジメント（後半）</h1>
+<div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
+<div class="info" id="info"></div>
+<div class="bar"><i id="bi"></i></div>
+<div id="card"></div>
+<div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
+<button id="rs" class="rs">覚えた記録をリセット</button>
+<script>
+const D=[["プロジェクト憲章", "開始前に作成される書類。プロジェクトの目的、作業範囲、スケジュール、予算、リスクなどを盛り込む文書", 0], ["PMBOK（ピンボック）", "プロジェクトマネジメントに必要な、10の知識エリアをまとめたもの", 1], ["スコープマネジメント", "作業範囲を決めて、必要な作業を洗い出す", 1], ["スコープ", "成果物と、そのための作業", 1], ["WBS", "ワーク ブレークダウン ストラクチャ。プロジェクトの最初に、作業を階層的に細かく分解した図", 1], ["統合マネジメント", "スコープを土台に、予算・品質・時間などを調整する。プロジェクト憲章も含まれる", 1], ["プロジェクト成功の3要素", "品質・費用・納期。バランスが重要", 1], ["アローダイアグラム", "作業の順序と日数を、矢印で表した図", 1], ["クリティカルパス", "全体の作業期間を決める、最も長い経路。ここが遅れると、全体が遅れる", 1], ["ITIL（アイティル）", "ITサービスを成功させるための、ベストプラクティス（成功事例）をまとめた「秘伝の書」", 1], ["SLA", "サービス レベル アグリーメント。運用サービスについて、問い合わせへの回答時間や復旧時間などを、あらかじめ具体的に取り決めておくもの", 1], ["サービスデスク", "サービス対応を一元管理する、窓口（入口）", 0], ["AIチャットボット", "AIが、自動的に対話して問い合わせに答える仕組み。人手不足対策に貢献する", 1], ["インシデント管理", "お客様から問い合わせを受けた事柄（インシデント）を、一刻も早く解決する", 1], ["エスカレーション", "解決できないインシデントを、すぐに上位者に連絡すること", 1], ["問題管理", "インシデントの根本原因を究明して、再発を防ぐこと", 1], ["ファシリティマネジメント", "自然災害、火災、設備の不良、盗難などから、システム環境を守り、安全に管理すること", 1], ["無停電装置（UPS）", "停電しても、一定時間、電気を供給し続ける装置", 0], ["フリーアドレス", "決まった席を持たず、空いている席を自由に選んで働く方式", 0], ["BCP（事業継続計画）", "自然災害、サイバー攻撃、盗難、テロなどが起きても、事業を続けるための計画", 1], ["システム監査", "情報システムのリスク管理が適切かを、チェックすること。評価基準は、信頼性・安全性・効率性", 0], ["システム監査人", "システム監査を行う、企業から独立した第三者", 1], ["システム監査人の仕事の流れ", "監査計画→予備調査→本調査→監査報告書作成→監査報告書提出→フォローアップ", 1]];
+let M={};try{M=JSON.parse(localStorage.getItem("itp8_2")||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem("itp8_2",JSON.stringify(M))}catch(e){}};
+let f="all",sh=false,sv=false,L=[],i=0,back=false;
+const $=s=>document.querySelector(s);
+const vis=k=>sv||!M[D[k][0]];
+function nxt(s){for(let n=1;n<=L.length;n++){const j=((i+s*n)%L.length+L.length)%L.length;if(vis(L[j]))return j}return -1}
+function build(){L=D.map((_,k)=>k).filter(k=>f=="all"||D[k][2]);
+if(sh)for(let k=L.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[L[k],L[j]]=[L[j],L[k]]}
+i=0;if(L.length&&!vis(L[0]))i=nxt(1);back=false;render()}
+function render(){const c=$("#card"),T=L.length,N=L.filter(k=>!M[D[k][0]]).length,ok=$("#ok");
+$("#info").textContent="残り "+N+" 枚 / 全 "+T+" 枚";$("#bi").style.width=(T?(T-N)/T*100:0)+"%";
+if(i<0||!T){c.className="";ok.disabled=true;ok.className="";ok.textContent="○ 覚えた";
+c.innerHTML="<div id='d'>全部覚えました 🎉</div><div class='hint'>上の［「覚えた」を見る］で復習できます</div>";return}
+ok.disabled=false;const d=D[L[i]],on=!!M[d[0]];c.className=d[2]?"vip":"";
+ok.className=on?"on":"";ok.textContent=on?"✓ 覚えた（タップで取り消し）":"○ 覚えた";
+c.innerHTML=(d[2]?"<span class='badge'>超重要</span>":"")+(back?"<div class='hint' style='margin:0 0 12px'>"+d[0]+"</div><div id='d'>"+d[1]+"</div>":"<div id='t'>"+d[0]+"</div><div class='hint'>タップで解説</div>")}
+const go=s=>{if(!L.length)return;i=nxt(s);back=false;render()};
+$("#card").onclick=()=>{if(i>=0){back=!back;render()}};
+$("#nx").onclick=()=>go(1);$("#pv").onclick=()=>go(-1);
+$("#ok").onclick=()=>{if(i<0)return;const t=D[L[i]][0];if(M[t])delete M[t];else M[t]=1;save();render()};
+$("#fs").onclick=e=>{const b=e.target.closest("button");if(!b)return;
+if(b.id=="sh"){sh=!sh;b.classList.toggle("on",sh)}else if(b.id=="sv"){sv=!sv;b.classList.toggle("on",sv)}else{f=b.dataset.f;document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x==b))}build()};
+let x0=0;$("#card").ontouchstart=e=>{x0=e.touches[0].clientX};
+$("#card").ontouchend=e=>{const dx=e.changedTouches[0].clientX-x0;if(Math.abs(dx)>60){e.preventDefault();go(dx<0?1:-1)}};
+$("#rs").onclick=()=>{let ok=false;try{ok=confirm("「覚えた」の記録をすべて消して、最初の順番に戻します。よろしいですか？")}catch(e){}
+if(!ok)return;M={};save();f="all";sh=false;sv=false;
+document.querySelectorAll("[data-f]").forEach(x=>x.classList.toggle("on",x.dataset.f=="all"));
+$("#sh").classList.remove("on");$("#sv").classList.remove("on");build()};
+build();
+</script></body></html>
