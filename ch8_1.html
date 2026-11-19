@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第8章 マネジメント（前半）</h1>
+<div class="hd"><h1>ITパスポート 第8章 マネジメント（前半）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["システム化構想", "経営上のニーズと課題にマッチした、大まかな全体像", 0], ["システム化計画", "品質、納期、コストなどを含めた、ざっくりとした計画", 0], ["要件定義", "要求される機能や性能を実現可能な内容として決定すること", 1], ["業務要件定義", "どんな業務を対象にするのかを決める", 0], ["機能要件定義", "実現できる機能を決める", 0], ["非機能要件定義", "処理時間やセキュリティ対策など、機能以外を決める", 0], ["RFI（情報提供依頼書）", "リクエスト フォー インフォメーション\n複数のベンダから、技術や実績など幅広い情報を提供してもらう依頼書", 1], ["RFP（提案依頼書）", "リクエスト フォー プロポーザル\n選んだ候補のベンダに、要望を実現する具体的な案を提案してもらう依頼書", 1], ["NDA（秘密保持契約）", "ノン ディスクロージャー アグリーメント。知った情報を、外部に漏らさないという約束", 1], ["セキュリティ・バイ・デザイン", "開発の最初から、セキュリティを守る前提で設計すること（例：Apple）", 1], ["ホワイトボックステスト", "モジュールの内部構造に着目して、テストする。主に単体テストで用いる", 1], ["ブラックボックステスト", "仕様書に着目して、入力データに対して予想される出力データが出てくるかテストする", 1], ["アジャイル開発", "短期間のイテレーション（反復・繰り返し）で、迅速に開発する手法", 1], ["XP（エクストリームプログラミング）", "アジャイル開発の技法の一つ。単純さ、コミュニケーション、フィードバック、勇気を重視する", 1], ["テスト駆動型（テストファースト）", "テストを書いたあとに、コードを書く技法", 1], ["ペアプログラミング", "2人ペアで、1つのコードを書く。書く人とチェックする人が、役割を交代する", 1], ["リファクタリング", "コードを整えて、機能追加やバグの修正がしやすくなるようにする", 1], ["スクラム", "少人数のチームで、スプリントと呼ばれる期間ごとに、プログラムを開発する手法", 1], ["スクラムマスター", "チームワークが重要なスクラムで。チームのコミュニケーション、問題を解決する役割（コーチ）", 0], ["プロダクトオーナー", "企業との調整や、優先順位の決定を行う責任者", 0], ["DevOps（デブオプス）", "開発チームと運用チームが連携して、進める考え方", 1], ["プロトタイプモデル", "試作品（プロトタイプ）を作り、見た目や動きを確認しながら、開発する手法", 1], ["リバースエンジニアリング", "既にあるソフトウェアから、ソースコードや仕様（設計書）を導き出すこと。リバースは「逆にすること」", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp8_1")||"{}")}catch(e){}

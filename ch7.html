@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第7章 アルゴリズムとプログラム</h1>
+<div class="hd"><h1>ITパスポート 第7章 アルゴリズムとプログラム</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["順次構造", "処理を、上から順番に実行する", 0], ["繰り返し構造（反復）", "ループの開始から終了までを、繰り返して実行する", 0], ["選択構造（分岐）", "判断の結果（YesかNo）によって、実行する処理を分ける", 0], ["変数", "値を入れる箱のようなもの。新しい値を入れると、古い値は消えてしまう", 0], ["配列", "複数の変数を、要素番号をつけて、まとめて扱う仕組み", 0], ["キュー", "格納した順にデータを取り出す構造。行列に並ぶイメージ（例：印刷でプリンタに送る）", 1], ["スタック", "格納した順とは逆にデータを取り出す構造。エレベータに乗るイメージ（例：「戻る」ボタン）", 1], ["機械語", "コンピュータが理解できる、2進数の言語", 0], ["Java", "コンピュータの機種やOSに依存しないソフトウェアが開発できる言語", 1], ["Python", "人工知能（AI）の分野で注目されている言語", 1], ["JavaScript", "ブラウザ上で実行される簡易言語（Javaとは別の言語）", 1], ["HTML", "ホームページの構造（属性）を定義する言語（ハイパーテキスト マークアップ ランゲージ）", 1], ["CSS", "ホームページの見た目を整える言語（カスケーディング スタイル シート）", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp7")||"{}")}catch(e){}

@@ -54,6 +54,7 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 .top span{font-size:18px;font-weight:700;color:var(--g)}
 .src{font-size:12px;color:var(--sub);margin-top:18px}
 @media(min-width:700px){#fl{display:grid;grid-template-columns:1fr 1fr;gap:12px}.fb{margin-bottom:0;min-height:120px}}
+.top .rs{margin:0 0 0 auto;flex:none;font-size:13px}#rsall{margin-top:28px}
 </style></head><body>
 <div id="home" class="scr">
 <h1>ITパスポート 単語カード</h1>
@@ -64,13 +65,12 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 <button class="rs" id="rsall">全部の「覚えた」記録をリセット</button>
 </div>
 <div id="study" class="scr" hidden>
-<div class="top"><button id="bk">← ホーム</button><span id="fname"></span></div>
+<div class="top"><button id="bk">← ホーム</button><span id="fname"></span><button class="rs" id="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button class="rs" id="rs">この分野の「覚えた」記録をリセット</button>
 </div>
 <script>
 const CH=[["ch1", "第1章 ハードウェア", "te"], ["ch2", "第2章 ソフトウェア", "te"], ["ch3", "第3章 システム構成", "te"], ["ch4", "第4章 ネットワーク", "te"], ["ch5_1", "第5章 セキュリティ（前半）", "te"], ["ch5_2", "第5章 セキュリティ（後半）", "te"], ["ch6", "第6章 データベース", "te"], ["ch7", "第7章 アルゴリズムとプログラム", "te"], ["ch8_1", "第8章 マネジメント（前半）", "mg"], ["ch8_2", "第8章 マネジメント（後半）", "mg"], ["ch9_1", "第9章-1 企業活動と法務", "st"], ["ch9_2", "第9章-2 企業活動と法務", "st"], ["ch10_1", "第10章-1", "st"], ["ch10_2", "第10章-2", "st"], ["ch10_3", "第10章-3", "st"]];

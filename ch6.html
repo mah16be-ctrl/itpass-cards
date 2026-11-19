@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第6章 データベース</h1>
+<div class="hd"><h1>ITパスポート 第6章 データベース</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["DBMS", "データベースマネジメントシステム\nデータを正確・安全に保管し、トラブルがあったときは復旧できるような仕組みのシステム", 1], ["SQL", "関係データベースのデータを管理・操作するための言語", 1], ["BIツール", "データを分析し、グラフなどで可視化してビジネスに役立てる道具\n（ビジネス インテリジェンス）", 1], ["選択", "指定した「行」を抽出する", 1], ["射影", "指定した「列」を抽出する", 1], ["結合", "複数の表を、一つの表にする", 0], ["主キー", "レコードを一意に識別する項目", 0], ["外部キー", "他の表のデータと関連付けるために指定する項目", 0], ["E-R図", "実体（表）と関係を可視化する、モデリング技法", 1], ["モデリング", "業務を可視化すること", 1], ["正規化", "繰り返しになっている部分を、別の表に分けること", 0], ["トランザクション", "ある仕事を完結させるための切り離せない最小単位\n（例：AさんからBさんに1万円振り込む）", 1], ["コミット", "正常に終了したときに、処理を確定すること", 1], ["ロールバック", "異常終了したときに、処理を取り消して、元の状態に戻すこと", 1], ["排他制御", "同時に更新しようとしたとき、先に受け付けた人だけが更新できるようにする仕組み", 0], ["デッドロック", "互いに相手の処理が終わるのを待ち続けて、どちらも先に進めなくなる状態", 0], ["ACID（アシッド）特性", "トランザクションが満たすべき4つの性質\n中途半端はない、矛盾がない、互いに影響されない、失われない", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp6")||"{}")}catch(e){}

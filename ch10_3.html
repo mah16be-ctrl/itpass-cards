@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第10章-3（ストラテジ系）</h1>
+<div class="hd"><h1>ITパスポート 第10章-3（ストラテジ系）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["BSC（バランススコアカード）", "財務だけに偏らず、顧客・業務プロセス・学習と成長もあわせた4つの視点で、バランスよく経営を評価する手法", 1], ["KGI", "キー ゴール インディケーター。中長期の目標。達成したら、プロダクトの成功", 0], ["CSF", "クリティカル サクセス ファクター。KGIを達成するために必要な要素", 0], ["KPI", "キー パフォーマンス インディケーター。目標を達成するために設定する具体的な数値", 1], ["バリューエンジニアリング（VE）", "製品やサービスに必要な価値を決めてから、コストを削る手法（価値＝機能÷コスト）", 1], ["CRM（カスタマー リレーションシップ マネジメント）", "顧客との関係を強化して、リピーターを増やし、売上を伸ばす仕組み（例：誕生日に割引サービス）", 1], ["SFA（セールス フォース オートメーション）", "営業活動の情報を一元管理して、営業を支援・効率化する仕組み", 1], ["SCM（サプライ チェーン マネジメント）", "原材料の調達から販売まで、モノの流れ（供給の連鎖）を管理して、全体を効率化する手法", 1], ["ERP", "エンタープライズ リソース プランニング。ヒト、モノ、カネを一元管理する。基幹システムともいう", 1], ["準天頂衛星", "日本の衛星測位システム。高精度な位置情報を提供する（みちびき）", 0], ["JIT（ジャストインタイム）", "必要なものを、必要な時に、必要なだけ生産するトヨタ自動車の生産方式。部品のやりとりに、かんばんを使ったのでかんばん方式ともいう", 1], ["リーン生産方式", "JITが、アメリカで製造業以外にも応用されて、一般化したもの", 1], ["スマートファクトリー", "デジタル技術で最適化された生産を行う、次世代の工場", 0], ["FMS", "フレキシブル マニュファクチャリング システム。柔軟な設備。少量多品種生産が可能になる", 1], ["M2M", "マシン トゥ マシン。機械同士の通信", 0], ["コンカレントエンジニアリング", "製品開発の工程を、順番ではなく同時に並行して進めて、開発期間を短縮する手法", 1], ["eKYC（イーケーワイシー）", "エレクトロニック ノウ ユア カスタマー。必要な本人確認を、オンラインで行うこと", 1], ["ブロックチェーン", "すべてのブロックに取引の履歴が記録されていて、データの改ざんが難しい仕組み（ビットコインで有名）", 1], ["オプトインメール", "顧客に、あらかじめ同意を得てから送るメール。「特定電子メール法」で決められている（オプトは「選ぶ」の意味）", 1], ["A/Bテスト", "新たなデザインのWebサイトを実験的に並行稼働し、アクセス数や成約率（コンバージョン率）などを比較・検証する手法", 1], ["ロングテール", "Web販売で、販売機会の少ないニッチな商品の売上合計が、売れ筋のメイン商品を上回る現象（「長いしっぽ」の意味）", 0], ["エスクローサービス", "購入者と販売者の間に入る仲介者が、代金を一時的に預かり、商品の到着を確認してから支払うサービス（フリマ、オークションアプリ）", 1], ["デジタルサイネージ", "ディスプレイなどの電子機器で、情報や広告を表示する看板（電子看板）", 1], ["フリーミアム", "無料（フリー）で基本的な機能を体験でき、気に入ったら有料（プレミアム）で、より充実した機能を使える仕組み", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp10_3")||"{}")}catch(e){}

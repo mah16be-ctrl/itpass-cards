@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第10章-1（ストラテジ系）</h1>
+<div class="hd"><h1>ITパスポート 第10章-1（ストラテジ系）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["第4次産業革命", "機器からデータを集め、分析し、活用して、新たな価値を生み出す産業革命", 1], ["Society 5.0", "サイバー空間とフィジカル空間を高度に融合させた、人間中心の社会（超スマート社会）", 1], ["ビッグデータ", "日常の様々な場面で生まれる、大量で多様なデータ", 0], ["データサイエンス", "ビッグデータをAIなどで分析して、役に立つ情報や価値を引き出す", 0], ["ビッグデータの3つのV", "量が大きい（Volume）、種類が多様（Variety）、更新頻度が速い（Velocity）", 1], ["テキストマイニング", "大量の文章データから、よく出る言葉や関連性などの情報を取り出す分析", 1], ["経営理念", "企業の存在意義・あるべき姿・価値観を示したもの。", 1], ["MVV", "ミッション・ビジョン・バリュー。存在意義・あるべき姿・価値観", 1], ["経営戦略", "経営理念を実現するための戦略", 1], ["CSR", "コーポレート ソーシャル レスポンシビリティ。企業の社会的責任", 1], ["機能別組織（職能別組織）", "営業・製造・経理など、機能（職能）ごとに分けた組織", 0], ["事業部制組織", "事業ごとに分けた組織。意思決定が迅速になる", 0], ["マトリクス組織", "機能別と事業別を組み合わせた組織。複雑なオペレーションに対応する", 0], ["カンパニー制組織", "事業部を、会社のように独立させた組織。意思決定が迅速になる", 0], ["PDCAサイクル", "計画（Plan）・実行（Do）・評価（Check）・改善（Action）を繰り返す、マネジメントの考え方", 1], ["コーポレートガバナンス（企業統治）", "企業経営が公正に判断・運営されるよう、監視・統制する仕組み", 1], ["ダークパターン", "消費者を気づかないうちに不利な選択へ誘導する、ウェブデザイン。コンプライアンス違反になる恐れがある", 1], ["内部統制", "経営者主体となり、不正が起きない仕組みを作り、モニタリングする", 1], ["モニタリング", "監視、評価。内部統制では、これを継続する", 1], ["職務分掌", "不正を防ぎ、責任の所在を明確にするため、申請・承認など担当者を分離する", 0], ["ベンチャーキャピタル（VC）", "スタートアップ企業に投資し、経営支援をして、上場、成長後に株式を売却して利益を得る", 1], ["CVC（コーポレートベンチャーキャピタル）", "事業会社が、スタートアップ企業に投資する活動（例：ドジャース）", 0], ["エコシステム", "様々な業種が影響し合って、収益を上げる仕組み", 1], ["PPM（プロダクトポートフォリオマネジメント）", "市場成長率と市場占有率で、事業を花形、問題児、金のなる木、負け犬の4つに分類して、経営資源の配分を考える手法", 1], ["SWOT分析", "強み・弱み（内部環境）と、機会・脅威（外部環境）で、自社を分析する手法", 1], ["バリューチェーンマネジメント", "全体の流れの中で、各部門の価値を評価し、重要なポジションを見出して、戦略をたてる", 1], ["DX（デジタルトランスフォーメーション）", "デジタル技術で、仕組みやビジネスを大きく変えること", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp10_1")||"{}")}catch(e){}

@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第9章-1（企業活動と法務）</h1>
+<div class="hd"><h1>ITパスポート 第9章-1（企業活動と法務）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["ディスクロージャ", "情報開示。企業が、株主などに、経営や財務の情報を公開すること", 0], ["IPO（新規公開株）", "上場して、初めて公開株式を発行すること", 0], ["貸借対照表（B/S）", "企業の財政状態を表したもの", 1], ["損益計算書（P/L）", "一会計期間の経営成績を表したもの", 1], ["キャッシュフロー計算書（C/F）", "お金の流れを、営業活動・投資活動・財務活動の3区分に分けて表したもの", 1], ["流動比率", "貸借対照表の流動資産と流動負債を比べた、1年以内の支払い能力。高いほど良い", 0], ["自己資本比率", "資産に対する、自己資本（純資産）の割合。高いほど、借金が少なく、企業の安全性が高い", 0], ["売上総利益（粗利）", "売上高から、売上原価を引いた利益", 0], ["営業利益", "売上総利益から、販売費及び一般管理費を引いた利益。本業のもうけ", 1], ["経常利益", "営業利益に、営業外収益を足し、営業外費用を引いた利益", 1], ["当期純利益", "今期の純粋な利益", 0], ["ROE（自己資本利益率）", "リターン オン エクイティ。株主が出資したお金（自己資本）で、どれだけもうけ（当期純利益）を出しているかを示す", 0], ["損益分岐点", "売上と費用が等しくなる点。費用は、固定費＋変動費", 1], ["固定費", "売上の増減に関係なく、かかる費用（例：家賃）", 0], ["変動費", "売上の増減に応じて、変わる費用（例：材料費）", 0], ["知的財産権", "知的財産（IP）を保護する権利。著作権と産業財産権に分かれる", 0], ["著作権", "文化庁が管轄。作者が誰でも持つ権利（申請は不要）。利用には著作者の許可が必要", 1], ["産業財産権", "特許庁が管轄。申請と審査が必要。産業発展のための権利", 1], ["特許権", "新しい高度な発明を独占的に使用できる権利（例：青色LED）", 1], ["実用新案権", "品物の形状、構造、組み合わせがポイント。特許ほど高度ではないアイデアを保護する権利（例：カレーパン）", 1], ["意匠権", "独創的で美感を有する物品の形状、模様、色彩などのデザインを保護する権利（例：ダイソンの扇風機）", 0], ["商標権", "商品やサービスに使用するマーク（文字、図形など）を保護する権利。期間は10年で、更新できる", 1], ["特許ポートフォリオ", "コア特許を守るために、周辺特許を分析してまとめる。互いの相乗効果で網の目のように守りを固める（例：任天堂モーションセンサー）", 0], ["ビジネスモデル特許", "ビジネスの仕組みを、ITで実現した発明に与えられる特許（例：Amazonの「1-Click」）", 1], ["トレードマーク", "商品商標。商品に使うマーク（例：Panasonic、TOYOTA）", 0], ["サービスマーク", "役務商標。サービスに使うマーク（例：ANA、ヤマト運輸）", 0], ["不正競争防止法", "技術情報の無断の持ち出しなど、不正な競争を防ぐ法律", 1], ["限定提供データ", "不正競争防止法で定義された、限定提供性・電磁的管理性・相当量蓄積性の3つを満たす情報（例：POSデータ、交通情報、気象情報）※ビッグデータの有効活用のため", 0], ["電子透かし（デジタル・ウォーターマーク）", "画像などに、作者などの情報を埋め込んで、不正なコピーを防ぐ技術", 0], ["サイバーセキュリティ基本法", "日本のサイバーセキュリティに関する施策の、基本理念や戦略を定めた法律。国、企業などには責務、国民には努力義務がある", 1], ["不正アクセス禁止法", "他人のIDやパスワードを無断で使って、アクセスする行為を禁止する法律。ネットワークに接続されている、アクセス制限が条件", 1], ["個人情報保護法", "個人の権利や利益を守るため、個人情報の取得・利用目的の明示・目的外利用の制限・適正な管理などを定めた法律", 1], ["GDPR（一般データ保護規則）", "EU加盟国による、個人情報保護の統一ルール。EU域内の個人情報を扱うときは、十分な留意が必要", 0], ["特定電子メール法", "顧客へのメールは、あらかじめ同意を得てから送ることが定められている。オプトインメール（オプトは「選ぶ」の意味）", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp9_1")||"{}")}catch(e){}

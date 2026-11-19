@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第10章-2（ストラテジ系）</h1>
+<div class="hd"><h1>ITパスポート 第10章-2（ストラテジ系）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["ITガバナンス", "ITを戦略として使いこなす、企業の総合的な能力（ガバナンスは「統治」の意味）", 1], ["EA", "エンタープライズ アーキテクチャ。効率のよい組織に作り変えるための、設計手法（事業構造）\n・ギャップ分析：現状と理想を比較する\n・全体最適化：バラバラに改善せず、全体を見て計画的に直す", 1], ["BPR", "BPR（ビジネスプロセスリエンジニアリング）：業務を洗い出して抜本的に改善する", 1], ["SoR", "SoR（システム オブ レコード）：記録のシステム。正確さと安定が求められる", 0], ["SoE", "SoE（システム オブ エンゲージメント）：つながりのシステム。顧客との接点で、俊敏さが求められる", 0], ["DFD（データ フロー ダイアグラム）", "業務の流れ（データの流れ）を、図として表現したもの", 0], ["RPA（ロボティック プロセス オートメーション）", "PCの定型的な一連の操作を、ソフトウェアのロボットで自動化すること", 1], ["BYOD", "BYOD（ブリング ユア オウン デバイス）：個人のスマホやPCなどを、企業や学校で使うこと\n※許可を得て使うことを忘れずに", 1], ["STP", "マーケティングの考え方。\n・S：セグメンテーション：市場を、細分化する\n・T：ターゲティング：戦う市場を、決める\n・P：ポジショニング：決めた市場で、勝てる戦略を考える", 0], ["ペルソナ", "ターゲットから、より具体的な人物像を作り出すこと（ペルソナ分析）", 1], ["カスタマージャーニーマップ", "顧客が商品やサービスのファンになるまでの行動・思考・感情の流れを、可視化したもの", 1], ["イノベータ理論", "新しい商品が広まる過程を、採用する時期の早さで、5つのタイプに分けた理論\n・イノベーター：新しいもの好きな、冒険家\n・アーリーアダプター：流行に敏感な、オピニオンリーダー（重要）\n・アーリーマジョリティ：やや慎重派\n・レイトマジョリティ：周囲が使うようになってから使う、フォロワー\n・ラガード：流行に無関心な、保守派", 1], ["キャズム", "アーリーアダプターとアーリーマジョリティの間にある、普及の「深い溝」", 1], ["デジタルディスラプション", "次世代型の破壊的イノベーション。既存の産業が、デジタルの新興産業にシェアを奪われる", 1], ["インバウンドマーケティング", "顧客が、ネット検索やSNS、ブログなどから、自社の魅力を見つけ出してもらうことを目指す手法", 0], ["API", "アプリケーション プログラミング インターフェース。自社では難しい機能を、外部のプログラムとつなげて実現する仕組み", 1], ["オープンイノベーション", "自社だけでなく、外部の知識や技術も取り入れて、革新を生み出すこと", 1], ["ハッカソン", "技術者などが集まり、短期間に集中して、アイデアやサービスを開発する催し", 1], ["デザイン思考", "利用者の視点に立って、課題を見つけ、解決策を考える手法（例：任天堂「Wii」）", 1], ["リーンスタートアップ", "リーンスタートアップ：低コストで最小限の機能から始めて、評価・分析・改善を繰り返す", 1], ["イノベーションのジレンマ", "優れた技術を持ちながら、既存の事業にとらわれて、新しい波に乗れず衰退すること（例：コダック）", 0]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp10_2")||"{}")}catch(e){}

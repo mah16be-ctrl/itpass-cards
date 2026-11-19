@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第9章-2（企業活動と法務）</h1>
+<div class="hd"><h1>ITパスポート 第9章-2（企業活動と法務）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["労働者派遣契約", "派遣元企業（派遣会社）が労働者を派遣し、派遣先の指揮命令のもとで働かせるための契約", 1], ["二重派遣", "派遣先企業が、受け入れた派遣社員をさらに別の企業へ派遣すること。禁止されている", 0], ["請負契約", "仕事の完成を約束し、その成果に対して報酬を支払う契約", 1], ["偽装請負", "請負契約なのに、注文者が、労働者に直接、指揮命令をしている状態", 1], ["景品表示法", "消費者を守るために商品などの品質・価格などについて、実際より良く見せる不当な表示や、過大な景品の提供を規制する法律（例：「期間限定価格」「追加料金不要」なのに、実際は違う）", 1], ["情報公開法", "国民が、行政機関に対して、情報の開示を請求できる法律", 0], ["特性要因図", "特性（結果）に対して、要因（原因）を洗い出して、整理する図（魚の骨のような形）", 0], ["パレート図", "大きい順に並べた棒グラフと、累積比率の折れ線グラフを組み合わせた図。重点項目を把握する手法", 1], ["ABC分析", "売上などを大きい順に並べて、A・B・Cの3グループに分け、重点項目を把握する手法", 1], ["ヒストグラム", "区間ごとのばらつき（分布）を棒グラフで表した図", 0], ["相関関係", "2つのデータの関係。", 0], ["散布図", "散布図：2つのデータの相関関係を点で表した図", 1], ["ISO規格", "国際的に共通して使えるルールや基準を定める国際標準化機関。※詳細は[ISO直前に覚えよう.PDF]参照", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp9_2")||"{}")}catch(e){}

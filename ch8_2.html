@@ -35,14 +35,15 @@ button.on{background:var(--g);color:#fff;border-color:var(--g)}
 @media(max-height:520px) and (orientation:landscape){body{max-width:none;padding-top:6px;padding-bottom:6px}h1{display:none}#card{padding:12px}.badge{margin-bottom:6px}.ctl{grid-template-columns:repeat(3,1fr);margin-top:6px}#ok{grid-column:auto;order:2}#pv{order:1}#nx{order:3}.ctl button{min-height:44px}}
 .rs{display:block;margin:6px auto 0;background:none;border:none;color:var(--sub);font-size:13px;text-decoration:underline;min-height:36px;padding:4px 10px}
 #t,#d,.hint{white-space:pre-line}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.hd h1{margin:0}.hd .rs{margin:0;flex:none;font-size:13px}
+@media(max-height:520px) and (orientation:landscape){.hd{justify-content:flex-end;margin-bottom:0}}
 </style></head><body>
-<h1>ITパスポート 第8章 マネジメント（後半）</h1>
+<div class="hd"><h1>ITパスポート 第8章 マネジメント（後半）</h1><button id="rs" class="rs">リセット</button></div>
 <div class="row" id="fs"><button data-f="all" class="on">すべて</button><button data-f="vip">超重要</button><button id="sv">「覚えた」を見る</button><button id="sh">シャッフル</button></div>
 <div class="info" id="info"></div>
 <div class="bar"><i id="bi"></i></div>
 <div id="card"></div>
 <div class="ctl"><button id="ok">○ 覚えた</button><button id="pv">◀ 前へ</button><button id="nx">次へ ▶</button></div>
-<button id="rs" class="rs">覚えた記録をリセット</button>
 <script>
 const D=[["プロジェクト憲章", "開始前に作成される書類。プロジェクトの目的、作業範囲、スケジュール、予算、リスクなどを盛り込む文書", 0], ["PMBOK（ピンボック）", "プロジェクトマネジメントに必要な、10の知識エリアをまとめたもの", 1], ["スコープマネジメント", "作業範囲を決めて、必要な作業を洗い出す", 1], ["スコープ", "成果物と、そのための作業", 1], ["WBS", "ワーク ブレークダウン ストラクチャ。プロジェクトの最初に、作業を階層的に細かく分解した図", 1], ["統合マネジメント", "スコープを土台に、予算・品質・時間などを調整する。プロジェクト憲章も含まれる", 1], ["プロジェクト成功の3要素", "品質・費用・納期。バランスが重要", 1], ["アローダイアグラム", "作業の順序と日数を、矢印で表した図", 1], ["クリティカルパス", "全体の作業期間を決める、最も長い経路。ここが遅れると、全体が遅れる", 1], ["ITIL（アイティル）", "ITサービスを成功させるための、ベストプラクティス（成功事例）をまとめた「秘伝の書」", 1], ["SLA", "サービス レベル アグリーメント。運用サービスについて、問い合わせへの回答時間や復旧時間などを、あらかじめ具体的に取り決めておくもの", 1], ["サービスデスク", "サービス対応を一元管理する、窓口（入口）", 0], ["AIチャットボット", "AIが、自動的に対話して問い合わせに答える仕組み。人手不足対策に貢献する", 1], ["インシデント管理", "お客様から問い合わせを受けた事柄（インシデント）を、一刻も早く解決する", 1], ["エスカレーション", "解決できないインシデントを、すぐに上位者に連絡すること", 1], ["問題管理", "インシデントの根本原因を究明して、再発を防ぐこと", 1], ["ファシリティマネジメント", "自然災害、火災、設備の不良、盗難などから、システム環境を守り、安全に管理すること", 1], ["無停電装置（UPS）", "停電しても、一定時間、電気を供給し続ける装置", 0], ["フリーアドレス", "決まった席を持たず、空いている席を自由に選んで働く方式", 0], ["システム監査", "情報システムのリスク管理が適切かを、チェックすること。評価基準は、信頼性・安全性・効率性", 0], ["システム監査人", "システム監査を行う、企業から独立した第三者", 1], ["システム監査人の仕事の流れ", "監査計画→予備調査→本調査→監査報告書作成→監査報告書提出→フォローアップ", 1]];
 let M={};try{M=JSON.parse(localStorage.getItem("itp8_2")||"{}")}catch(e){}
